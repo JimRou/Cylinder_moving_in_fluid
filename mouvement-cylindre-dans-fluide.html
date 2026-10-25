@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mouvement d'un cylindre dans un fluide au repos</title>
+	<meta name="description" content="Simulation du mouvement d'un cylindre en mouvement dans un fluide au repos grace à processing et processing.js">
+	<meta name="author" content="Jimmy Roussel">
+    <link rel="stylesheet" href="css/style-simu.css">
+</head>
+<body>
+<header>
+	<h1>Mouvement d'un cylindre dans un fluide au repos</h1>
+	<nav>
+		<button class="popover-btn" popovertarget="informations"><i class="fa-solid fa-circle-info"></i>Informations</button>
+	</nav>
+</header>
+
+
+
+<figure class="simu">
+	<canvas id="sketch" data-processing-sources="pde/ecoulement-non-stationnaire.pde"></canvas>
+	<noscript><p>JavaScript is required to view the contents of this page.</p></noscript>
+	<div class="control">
+		<h4>INTERACTIONS</h4>
+		<ul>
+			<li>Cliquez pour injecter un traceur</li>
+			<li><input type="button" onclick="ResetSketch('sketch')" value="Reset"></li>
+			<li><input type="button" onclick="TraceSketch('sketch')" value="Afficher/masquer le trajet"></li>
+		</ul>
+		<form>
+			<input type="radio" id="radio7" name="radio" checked="checked" onclick="PlaySketch('sketch')"/>
+			<label for="radio7">Play</label>
+			<input type="radio" id="radio8" name="radio" onclick="PauseSketch('sketch')"/>
+			<label for="radio8" >Pause</label>
+		</form>
+	</div>
+</figure>
+
+	
+
+<footer>
+	<p>FEMTO &mdash; <strong>Simuler pour apprendre</strong> &mdash; 
+		<a id="copyright" rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">
+			<i class="fa-brands fa-creative-commons fa-lg"></i>
+			<i class="fa-brands fa-creative-commons-by fa-lg"></i>
+			<i class="fa-brands fa-creative-commons-nc fa-lg"></i>
+		</a>.
+	</p>
+</footer>
+<div id="informations" popover>
+	<div class="copyright">
+		<address>&copy;&nbsp;Jimmy Roussel</address>
+		<time pubdate datetime="2013-01"><i class="fa-sharp-duotone fa-thin fa-calendar"></i>Janv. 2013</time>
+	</div>
+	<h3>Principe</h3>
+	<p>Plaçons un cylindre dans un fluide parfait (non visqueux) au repos, et animons-le d'une vitesse constante. Le fluide, perturbé par le cylindre en mouvement, est alors le siège d'un écoulement non stationnaire.  Autrement dit, en chaque point du fluide la vitesse varie au cours du temps. Dans ce cas, la trajectoire d'une particule de fluide ne se confond plus avec une ligne de courant. La simulation permet d'illustrer les différences que recèlent ces notions.</p>
+	<div id="biblio">
+		<h3>Pour en savoir plus...</h3>
+		<ol>
+			<li id="Roussel">
+				<span class="author">J. Roussel</span>
+				<span class="article"><a href="https://femto-physique.fr/mecanique_des_fluides/cinematique.php">Cinématique des fluides</a></span>[en ligne], 2010. Disponible sur 
+				<span class="site"><a href="https://femto-physique.fr/">femto-physique.fr</a></span>
+			</li>
+		</ol>
+	</div>	
+</div>
+</body>
+<!-- ========== LES SCRIPTS ==============	 -->
+<script type="text/javascript" src="js/processing-1.4.8.min.js"></script>
+<script>
+    var pjs; 
+	function PlaySketch(id) {
+		pjs = Processing.getInstanceById(id);
+		pjs.Marche();
+	}
+	function ResetSketch(id) {
+		pjs = Processing.getInstanceById(id);
+		pjs.ReInit();
+	}
+	function PauseSketch(id) {
+		pjs = Processing.getInstanceById(id);
+		pjs.Arret();
+	}
+	function TraceSketch(id) {
+		pjs = Processing.getInstanceById(id);
+		pjs.AfficheTrace();
+	}
+</script>
+</html>
+
